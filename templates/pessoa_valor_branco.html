@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block corpo %}
+    <h3>Cadastro de contribuintes</h3><span> valores superiores a R$ 50,00</span>
+    <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-default" type="submit" value="/">ENVIAR</button>
+    </form>
+{% endblock %}

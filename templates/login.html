@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block corpo %}
+    <form action=""  method="post">
+    {% csrf_token %}
+
+    <div style="left: 40%;position: relative;"> {{ form.username.label_tag }}
+    {{ form.username }}</div>
+        <hr>
+        <div style="left: 40%; position: relative;">
+    {{ form.password.label_tag }}
+
+    {{ form.password }}</div>
+            <hr>
+        <div style="left: 40%;position: relative;">
+    <button type="submit" value="/">ENVIAR</button>
+            </div>
+    </form>
+{% endblock %}

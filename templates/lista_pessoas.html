@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block corpo %}
+
+
+        <h3>Quantidade de contribuintes até R$ 50,00  :</h3><span style="left: 65%;top: 35%; color: #67b168;position: absolute; font-size: 20px;">{{ itensp }}</span>
+
+        <h3>Quantidade de contribuintes a cima de R$ 50,00 :</h3>
+        <span style="left: 65%;top: 40%; color: #67b168;position: absolute; font-size: 20px;">{{ itemspb }}</span>
+
+        <hr>
+        <h3>Lista de contribuintes até R$50,00</h3>
+
+        {% for i in lista_50 %}
+                <p style="color: #67b168;">{{ i.nome }} - Valor : {{ i.valor_cadastrado }}</p>
+               {% empty %}
+            <hr>
+            <span style="color: red">sem registro</span>
+
+            {% endfor %}
+
+
+
+    <h3 style="left: 60%;top: 48%;position: absolute;">Lista de contribuintes maiores que R$50,00</h3>
+    <div style="left: 60%;top: 52%;position: absolute;">
+    {% for i in lista_mais_50 %}
+        <p style="color: #67b168;">{{ pessoa_mais_50.nome }} - Valor : {{ pessoa_mais_50.valor }}</p>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+   {% endblock %}

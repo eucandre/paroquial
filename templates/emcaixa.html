@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block area %}
+    Em caixa
+{% endblock %}
+{% block corpo %}
+<h3>Valor em caixa</h3>
+
+
+
+    <form action="." method="post">
+    {% csrf_token %}
+        <label style="top:45%;position: absolute;" for="id_valor">Valor</label>
+    <input style="width: 10%; top: 50%; position: absolute;" name="valor" value="{{ item }}" class="form-control" type="text" id="id_valor" readonly="readonly" />
+        <label style="top:45%;left: 50%;position: absolute;" for="id_data" >Data</label>
+   <!-- <input id="id_data" style="width: 10%; top:50%; left: 50%;position: absolute;" type="text" class="form-control" name="data" />-->
+        <div style="left: 50%;top: 50%;width: 20%;position: absolute;">
+        <span>
+            {{ form.data }}
+        </span>
+            </div>
+        <button type="submit" value="/" style="position: absolute;top: 60%;left: 40%;">ENVIAR</button>
+    </form>
+
+{% endblock %}

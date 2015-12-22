@@ -1,0 +1,41 @@
+def get_valor_contribuicao(self):
+        p1 = pessoa.objects.all()
+        p2 = pessoa()
+        pessoa10 = []
+        pessoa20 = []
+        pessoa50 = []
+        pessoa_valor_branco = []
+        i = 0
+        while i < len(p1):
+
+            if p2.valor_cadastrado == '10':
+                pessoa10.append(p2.nome)
+                i = i + 1
+
+            elif p2.valor_cadastrado == '20':
+                pessoa20.append(p2.nome)
+                i = i + 1
+
+            elif p2.valor_cadastrado == '50':
+                pessoa50.append(p2.nome)
+                i = i + 1
+
+            elif p2.valor_cadastrado > '50':
+                pessoa_valor_branco.append(p2.nome)
+                i += 1
+        total_valores = (len(pessoa10)*10)+(len(pessoa20)*20)+(len(pessoa50)*50)+len(pessoa_valor_branco)
+    expectativa_receita = models.FloatField()  #almeija mostrar um valor para ser aucancando con contribuir
+
+
+
+    if request.method == "post":
+        form = FormEmcaixa(request.POST, request.FILES)
+        if form.is_valid():
+            dados  = form.cleaned_data
+            item = Emcaixa(valor = dados['valor'], data = dados['data'])
+
+            item.save()
+            return render_to_response("salvo.html",{})
+    else:
+        form = FormEmcaixa()
+    return render_to_response("emcaixa.html", {"form":form},{"item":item}, context_instance = RequestContext(request))

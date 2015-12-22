@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paróquia santo antônio</title>
+    <!-- Bootstrap Styles-->
+    <link href="/media/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="/media/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="/media/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="/media/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="/media/Sant-Antonio-di-Padova.jpg" >
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/inicial/">MENU</a>
+                <a style="left: 500%; position: relative;" href="/logout/">sair</a>
+            </div>
+
+
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a class="active-menu" href="/receita_ate_50/"><i class="fa fa-dashboard"></i> Receita até R$ 50,00</a>
+                    </li>
+                    <li>
+                        <a class="active-menu" href="/receita_maior_50/"><i class="fa fa-dashboard"></i> Receita maiores que R$50,00</a>
+                    </li>
+
+                    <li>
+                        <a href="/despesas/"><i class="fa fa-desktop"></i> Despesa</a>
+                    </li>
+					<li>
+                        <a href="/pessoa/"><i class="fa fa-bar-chart-o"></i> Cadastro de contribuintes</a>
+                    </li>
+                    <li>
+                        <a href="/pessoa_valor_branco/"><i class="fa fa-qrcode"></i> Contribuintes acima de R$ 50</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/em_caixa/"><i class="fa fa-table"></i> Em caixa </a>
+                    </li>
+                    <li>
+                        <a href="/lista_pessoas/"><i class="fa fa-edit"></i> Lista de pessoas </a>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Paróquia Santo Antônio de Pádua <small>Refórma da igreja matriz</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                {% block corpo %}
+
+                {% endblock %}
+                </div>
+
+                </div>
+                <!-- /. ROW  -->
+
+
+                <!-- /. ROW  -->
+				<footer><p>Desenvolvido por : <a href="http://webthemez.com">Carlos André Dantas de Lima</a></p></footer>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="/media/assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="/media/assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="/media/assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="/media/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="/media/assets/js/morris/morris.js"></script>
+    <!-- Custom Js -->
+    <script src="/media/assets/js/custom-scripts.js"></script>
+
+
+</body>
+
+</html>
