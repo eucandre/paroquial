@@ -138,29 +138,40 @@ def relatorio(request):
             obj_receita50 = receita_ate_50.objects.all()
             tam_receita50 = len(receita_ate_50.objects.all())
             obj_receita_50 = receita_maior_50.objects.all()
+            obj_soma_receita50 = receita_ate_50()
+            obj_soma_receita_50 = receita_maior_50()
             ate_10 = []
             ate_20 = []
             ate_30 = []
             ate_50 = []
             acima_50 = []
+            soma = 0
             for i in obj_receita50:
                 if i.valor_recebido==10:
                     ate_10.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_10)*10
                 elif i.valor_recebido==20:
                     ate_20.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_20)*20
                 elif i.valor_recebido==30:
                     ate_30.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_30)*30
                 elif i.valor_recebido==50:
                     ate_50.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_50)*50
 
             for i in obj_receita_50:
                 if i.valor_recebido>50:
                     acima_50.append(i.pessoa_contribuinte.nome)
-
+                    soma = soma+i.valor_recebido
             tam_receita_maior50 = len(receita_maior_50.objects.all())
-            dados = [obj_receita_50,obj_receita50,tam_receita50,tam_receita_maior50,ate_10,ate_20,ate_30,ate_50,acima_50]
+            #dados = [obj_receita_50,obj_receita50,tam_receita50,tam_receita_maior50,ate_10,ate_20,ate_30,ate_50,acima_50]
             #json = demjson.encode(dados)
-            return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,})# "plots":json})
+            #for i in obj_receita50:
+            #    for j in obj_receita_50:
+            #        soma = i.valor_recebido+j.valor_recebido
+
+            return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,"soma":soma})# "plots":json})
     except receita_ate_50.DoesNotExist and receita_maior_50.DoesNotExist:
         raise Http404()
 

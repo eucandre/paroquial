@@ -1,11 +1,22 @@
 {% extends 'index1.html' %}
 
+
+
 {% block corpo %}
 
         <h3>Quantidade de contribuintes até R$ 50,00  :</h3><span style="left: 65%;top: 30%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho50 }}</span>
 
         <h3>Quantidade de contribuintes a cima de R$ 50,00 :</h3>
         <span style="left: 65%;top: 35%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho_maior_50 }}</span>
+        <h3>Total recebido</h3><span>{{ soma }}</span>
+
+    <div class="col-md-12">
+                        <h1 class="page-header">
+
+                        </h1>
+                    </div>
+
+
 
         <hr>
         <h3>Contribuiram até R$50,00</h3>
