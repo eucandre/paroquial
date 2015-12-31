@@ -1,0 +1,138 @@
+{% extends 'index1.html' %}
+
+{% block corpo %}
+
+        <h3>Quantidade de contribuintes até R$ 50,00  :</h3><span style="left: 65%;top: 30%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho50 }}</span>
+
+        <h3>Quantidade de contribuintes a cima de R$ 50,00 :</h3>
+        <span style="left: 65%;top: 35%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho_maior_50 }}</span>
+
+        <hr>
+        <h3>Contribuiram até R$50,00</h3>
+
+        {% for i in obj_receita50 %}
+                <p style="color: #67b168;">{{ i.pessoa_contribuinte }} - Valor : {{ i.valor_recebido }}</p>
+                <span>Recebido em:  {{ i.mes_referente }}</span>
+               {% empty %}
+            <hr>
+            <span style="color: red">sem registro</span>
+
+            {% endfor %}
+
+
+
+    <h3 style="left: 60%;top: 48%;position: absolute;">Contribuiram a cima de R$50,00</h3>
+    <div style="left: 60%;top: 52%;position: absolute;">
+    {% for i in obj_maior_50 %}
+        <p style="color: #67b168;">{{ i.pessoa_contribuinte }} - Valor  : {{ i.valor_recebido }}</p>
+        <span>Recebido em: {{ i.mes_referente }}</span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+
+
+    <h3 style="left: 60%;top: 78%;position: absolute;">Contribuiram até R$10,00</h3>
+    <div style="left: 60%;top: 82%;position: absolute;">
+    {% for i in ate10 %}
+        <p style="color: #67b168;">{{ i }}</p>
+        <span></span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+
+    <h3 style="left: 60%;top: 108%;position: absolute;">Contribuiram até R$20,00</h3>
+    <div style="left: 60%;top: 112%;position: absolute;">
+    {% for i in ate20 %}
+        <p style="color: #67b168;">{{ i }}</p>
+        <span></span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+
+    <h3 style="left: 60%;top: 138%;position: absolute;">Contribuiram até R$30,00</h3>
+    <div style="left: 60%;top: 142%;position: absolute;">
+    {% for i in ate30 %}
+        <p style="color: #67b168;">{{ i }}</p>
+        <span></span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+    <h3 style="left: 60%;top: 168%;position: absolute;">Contribuiram até R$50,00</h3>
+    <div style="left: 60%;top: 172%;position: absolute;">
+    {% for i in ate50 %}
+        <p style="color: #67b168;">{{ i }}</p>
+        <span></span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+    <h3 style="left: 60%;top: 198%;position: absolute;">Contribuiram a cima de R$50,00</h3>
+    <div style="left: 60%;top: 202%;position: absolute;">
+    {% for i in acima %}
+        <p style="color: #67b168;">{{ i }}</p>
+        <span></span>
+        {% empty %}
+        <hr>
+        <span style="color: red">sem registo</span>
+    {% endfor %}
+    </div>
+
+   {% endblock %}
+
+{% block auxiliar %}
+<div style="width:30%">
+			<canvas id="canvas" height="450" width="450"></canvas>
+
+		</div>
+
+
+	<script>
+	var radarChartData = {
+		labels: ["Comtribuiram R$ 10", "Contribuiram R$ 20", "Contribuiram R$ 30", "Contribuiram R$ 50", "A cima de R$ 50"],
+		datasets: [
+			{
+				label: "My First dataset",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+
+				data: [65,59,90,81,56,55,40]
+			},
+			{
+				label: "My Second dataset",
+				fillColor: "rgba(151,187,205,0.2)",
+				strokeColor: "rgba(151,187,205,1)",
+				pointColor: "rgba(151,187,205,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(151,187,205,1)",
+				data: [28,48,40,19,96,27,100]
+			}
+		]
+	};
+
+	window.onload = function(){
+		window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+			responsive: true
+		});
+	}
+
+	</script>
+{% endblock %}

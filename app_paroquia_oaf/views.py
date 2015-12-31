@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+import demjson
 from models import *
 from forms import *
 
@@ -88,9 +89,10 @@ def valor_caixa(request):
             dados = form.cleaned_data
             item = Emcaixa(valor = dados['valor'], data = dados['data'])
             item.save()
+            return render_to_response("salvo.html",{})
     else:
         form = FormEmcaixa()
-    return render_to_response("emcaixa.html", {"form":form,"item":form.emcaixa, "itemd":form.data})
+    return render_to_response("emcaixa.html", {"form":form,"item":form.emcaixa, "itemd":form.data}, context_instance = RequestContext(request))
 
 @login_required()
 def lista_pessoas(request):
@@ -99,23 +101,67 @@ def lista_pessoas(request):
 
             itensp = len(pessoa.objects.all())
             itenspb = len(pessoa_valor_branco.objects.all())
+
             if itensp ==0 and itenspb==0:
+
                 contribuintes_50 = "Sem registro"
                 contribuintes_50 = "Sem registro"
                 return render_to_response("lista_pessoas.html",)
+
             elif itensp > 0 and itenspb>0:
+
                 contribuintes_50 = pessoa.objects.get(pk=itensp)
                 contribuintes_mais_50 = pessoa_valor_branco.objects.get(pk=itenspb)
                 lista_50 = pessoa.objects.all()
                 lista_mais_50 = pessoa_valor_branco.objects.all()
                 return render_to_response("lista_pessoas.html", {"itensp":itensp, "itemspb":itenspb, "pessoa_50":contribuintes_50, "pessoa_mais_50":contribuintes_mais_50, "lista_50":lista_50, "lista_mais_50":lista_mais_50 })
+
             elif itensp>0 and itenspb==0:
                 contribuintes_50 = pessoa.objects.get(pk = itensp)
                 lista_50 = pessoa.objects.all()
                 return render_to_response("lista_pessoas.html", {"itensp":itensp, "itemspb":itenspb, "pessoa_50":contribuintes_50,"lista_50":lista_50})
+
             elif itensp==0 and itenspb>0:
                 contribuintes_mais_50 = pessoa_valor_branco.objects.get(pk = itenspb)
                 lista_mais_50 = pessoa_valor_branco.objects.all()
                 return render_to_response("lista_pessoas.html",{"itensp":itensp, "itemspb":itenspb,"pessoa_mais_50":contribuintes_mais_50,"lista_mais_50":lista_mais_50 })
     except pessoa.DoesNotExist and pessoa_valor_branco.DoesNotExist:
         raise Http404()
+
+@login_required()
+def relatorio(request):
+    try:
+        itensp = len(pessoa.objects.all())
+        itenspb = len(pessoa_valor_branco.objects.all())
+
+        if itensp!=0 and itenspb!=0:
+            obj_receita50 = receita_ate_50.objects.all()
+            tam_receita50 = len(receita_ate_50.objects.all())
+            obj_receita_50 = receita_maior_50.objects.all()
+            ate_10 = []
+            ate_20 = []
+            ate_30 = []
+            ate_50 = []
+            acima_50 = []
+            for i in obj_receita50:
+                if i.valor_recebido==10:
+                    ate_10.append(i.pessoa_contribuinte.nome)
+                elif i.valor_recebido==20:
+                    ate_20.append(i.pessoa_contribuinte.nome)
+                elif i.valor_recebido==30:
+                    ate_30.append(i.pessoa_contribuinte.nome)
+                elif i.valor_recebido==50:
+                    ate_50.append(i.pessoa_contribuinte.nome)
+
+            for i in obj_receita_50:
+                if i.valor_recebido>50:
+                    acima_50.append(i.pessoa_contribuinte.nome)
+
+            tam_receita_maior50 = len(receita_maior_50.objects.all())
+            dados = [obj_receita_50,obj_receita50,tam_receita50,tam_receita_maior50,ate_10,ate_20,ate_30,ate_50,acima_50]
+            #json = demjson.encode(dados)
+            return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,})# "plots":json})
+    except receita_ate_50.DoesNotExist and receita_maior_50.DoesNotExist:
+        raise Http404()
+
+

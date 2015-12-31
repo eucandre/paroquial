@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^despesas/$','app_paroquia_oaf.views.despesas'),
     url(r'^em_caixa/$','app_paroquia_oaf.views.valor_caixa'),
     url(r'^lista_pessoas/$','app_paroquia_oaf.views.lista_pessoas'),
+    url(r'^relatorio/$','app_paroquia_oaf.views.relatorio'),
     #url(r'^lista_pessoas/(?P<nr_item>\d+)/$','app_paroquia_oaf.views.lista_pessoas'),
 
     # Uncomment the admin/doc line below to enable admin documentation:

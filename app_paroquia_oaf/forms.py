@@ -16,15 +16,17 @@ class Formpessoa(forms.Form):
 class Formpessoa_valor_branco(forms.ModelForm):
     nome = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
     valor = forms.IntegerField( widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%"}))
-    data = forms.DateField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:20%"}))
+    logradouro = forms.CharField(max_length=150,widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
+    numero_residencial = forms.IntegerField(label="Numero",widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
+
+
     class Meta:
         model = pessoa_valor_branco
-        fields = ['nome', 'valor', 'data']
-
+        fields = ['nome', 'valor','logradouro','numero_residencial']
 
 class Formreceita_ate_50(forms.Form):
     responsavel_pelo_recebimento = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
-    valor_recebido = forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
+    valor_recebido = forms.FloatField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
     pessoa_contribuinte = forms.ModelChoiceField(queryset=pessoa.objects.all(),widget=forms.Select(attrs={"class":"form-control", "style":"width:50%"}))
     mes_referente = forms.DateField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
 
@@ -32,7 +34,7 @@ class Formreceita_ate_50(forms.Form):
 class Formreceita_maior_50(forms.Form):
     responsavel_pelo_recebimento = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
     valor_recebido = forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
-    pessoa_contribuinte = forms.ModelChoiceField(queryset=pessoa.objects.all(),widget=forms.Select(attrs={"class":"form-control", "style":"width:50%"}))
+    pessoa_contribuinte = forms.ModelChoiceField(queryset=pessoa_valor_branco.objects.all(),widget=forms.Select(attrs={"class":"form-control", "style":"width:50%"}))
     mes_referente = forms.DateField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
 
 

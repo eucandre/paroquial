@@ -20,7 +20,7 @@ class pessoa(models.Model):
         verbose_name_plural = "Pessoa"
 
 class pessoa_valor_branco(models.Model):
-    nome = models.CharField(max_length=150)
+    nome = models.CharField(max_length=150, unique=True)
     logradouro = models.CharField(max_length=150)
     valor = models.FloatField()
     numero_residencial = models.CharField(max_length=100)
@@ -34,7 +34,7 @@ class pessoa_valor_branco(models.Model):
         db_table = "valores em branco"
 
 class receita_ate_50(models.Model):
-    responsavel_pelo_recebimento = models.CharField(max_length=100)
+    responsavel_pelo_recebimento = models.CharField(max_length=100, unique_for_month=True)
     valor_recebido = models.IntegerField()
     pessoa_contribuinte = models.ForeignKey(pessoa)
     mes_referente = models.DateField(default=datetime.now(), blank=True)
@@ -81,7 +81,7 @@ class Emcaixa(models.Model):
     """
     valor = models.FloatField()
     data = models.DateField(default=datetime.now(), blank=True)
-    #usuario = models.ForeignKey(User)
+
 
 
     def __unicode__(self):
