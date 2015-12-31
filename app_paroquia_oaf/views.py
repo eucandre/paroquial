@@ -6,6 +6,10 @@ import demjson
 from models import *
 from forms import *
 
+from random import randint
+from django.views.generic import TemplateView
+from chartjs.views.lines import BaseLineChartView
+
 
 def apresentacao(request):
     return render_to_response("pagina_inicial.html")
@@ -174,5 +178,4 @@ def relatorio(request):
             return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,"soma":soma})# "plots":json})
     except receita_ate_50.DoesNotExist and receita_maior_50.DoesNotExist:
         raise Http404()
-
 
