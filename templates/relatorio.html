@@ -30,7 +30,22 @@
 
             {% endfor %}
 
+    <h3>Lista de pessoas cadastradas no sistema</h3>
+    {% for i in pessoa50 %}
+        <p style="color: #67b168;">{{ i.nome }} - Valor de cadastro : {{ i.valor_cadastrado }}</p>
+               {% empty %}
+            <hr>
+            <span style="color: red">sem registro</span>
 
+    {% endfor %}
+    {% for j in pessaos50 %}
+        <p style="color: #67b168;">{{ j.nome }} - Valor de cadastro : {{ j.valor }}</p>
+               {% empty %}
+            <hr>
+            <span style="color: red">sem registro</span>
+    {% endfor %}
+    <h3>Total de pessoas cadastradas no sistema</h3>
+    <span></span>total de<span style="color: #67b168">  {{Todos_contribuintes }} </span><span>Contribuintes cadastrados no sistema</span>
 
     <h3 style="left: 60%;top: 48%;position: absolute;">Contribuiram a cima de R$50,00</h3>
     <div style="left: 60%;top: 52%;position: absolute;">

@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'paroquial.app_paroquia_oaf',
-    'charjs',
+    #'charjs',
 )
 
 # A sample logging configuration. The only tangible logging
