@@ -172,6 +172,53 @@ def relatorio(request):
             tam_receita_maior50 = len(receita_maior_50.objects.all())
             total_pessoas_sistema = itensp+itenspb
             return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,"soma":soma, "pessoa50":pessoas_50, "pessaos50":pessoas_mais,"totalPessoas50":itensp, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
+        elif itensp==0 and itenspb==0:
+            return render_to_response("relatorio_vazio.html")
+
+        elif itensp!=0 and itenspb==0:
+            obj_receita50 = receita_ate_50.objects.all()
+            tam_receita50 = len(receita_ate_50.objects.all())
+            #obj_receita_50 = receita_maior_50.objects.all()
+            obj_soma_receita50 = receita_ate_50()
+            #obj_soma_receita_50 = receita_maior_50()
+            pessoas_50 = pessoa.objects.all()
+            #pessoas_mais = pessoa_valor_branco.objects.all()
+
+            ate_10 = []
+            ate_20 = []
+            ate_30 = []
+            ate_50 = []
+            soma = 0
+            for i in obj_receita50:
+                if i.valor_recebido==10:
+                    ate_10.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_10)*10
+                elif i.valor_recebido==20:
+                    ate_20.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_20)*20
+                elif i.valor_recebido==30:
+                    ate_30.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_30)*30
+                elif i.valor_recebido==50:
+                    ate_50.append(i.pessoa_contribuinte.nome)
+                    soma = len(ate_50)*50
+            total_pessoas_sistema = itensp
+            return render_to_response("relatorio _Sem_valor_branco.html",{"obj_receita50":obj_receita50, "tamanho50":tam_receita50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50,"soma":soma, "pessoa50":pessoas_50,"totalPessoas50":itensp, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
+
+        elif itensp ==0 and itenspb!=0:
+            obj_receita_50 = receita_maior_50.objects.all()
+            pessoas_50 = pessoa.objects.all()
+            pessoas_mais = pessoa_valor_branco.objects.all()
+            acima_50 = []
+            soma = 0
+            for i in obj_receita_50:
+                if i.valor_recebido>50:
+                    acima_50.append(i.pessoa_contribuinte.nome)
+                    soma = soma+i.valor_recebido
+            tam_receita_maior50 = len(receita_maior_50.objects.all())
+            total_pessoas_sistema = itenspb
+            return render_to_response("relatorio_sem_basicos.html",{"obj_maior_50":obj_receita_50,"tamanho_maior_50":tam_receita_maior50, "acima":acima_50,"soma":soma, "pessoa50":pessoas_50, "pessaos50":pessoas_mais, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
+
     except receita_ate_50.DoesNotExist and receita_maior_50.DoesNotExist:
         raise Http404()
 
