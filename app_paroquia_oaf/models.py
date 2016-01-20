@@ -5,17 +5,24 @@ from django.db import models
 from datetime import datetime
 
 
-VALOR = ((u'dez', '10'), (u'vinte', '20'), (u'cinquenta', '50'))
-
+VALOR = ((u'dez', '10'), (u'vinte', '20'), (u'trinta','30'), (u'cinquenta', '50'),(u'cem', '100'))
+TIPO = ((u'Mensal','Mensal'),(u'Sazonal', 'Sazonal'))
 
 class pessoa(models.Model):
+    '''
+        Esta classe guarda o nome endereco e o tipo de regularidade em pagamentos do contribuinte, que estao nos valores
+        ate R$ 100,00.
+    '''
+
     nome = models.CharField(max_length=150)
     logradouro = models.CharField(max_length=150)
     numero_residencial = models.CharField(max_length=100)
-    valor_cadastrado = models.CharField(choices=VALOR, max_length=3,)
+    valor_de_carne = models.CharField(choices=VALOR, max_length=3,)
+    tipo_de_regularidade = models.CharField(max_length=8)
 
     def __unicode__(self):
         return self.nome
+
     class Meta:
         verbose_name_plural = "Pessoa"
 
@@ -24,7 +31,7 @@ class pessoa_valor_branco(models.Model):
     logradouro = models.CharField(max_length=150)
     valor = models.FloatField()
     numero_residencial = models.CharField(max_length=100)
-    #data = models.DateField(default=datetime.now(), blank=True)
+    tipo_de_regularidade = models.CharField(max_length=8)
 
     #usuario = models.ForeignKey(User)
     def __unicode__(self):
@@ -34,6 +41,9 @@ class pessoa_valor_branco(models.Model):
         db_table = "valores em branco"
 
 class receita_ate_50(models.Model):
+    '''
+        Esta classe tem o objetivo de cadastrar os valores pagos pelos contribuintes
+    '''
     responsavel_pelo_recebimento = models.CharField(max_length=100, unique_for_month=True)
     valor_recebido = models.IntegerField()
     pessoa_contribuinte = models.ForeignKey(pessoa)

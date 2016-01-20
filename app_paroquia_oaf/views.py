@@ -132,6 +132,12 @@ def lista_pessoas(request):
 
 @login_required()
 def relatorio(request):
+    #fazer a verificacao por meses de  pagamento no relatorio.
+    #fazer total mensal, ja esta quase pronto, fazer o total geral, a somatoria dos meses menos as possiveis retiradas
+    # prototipo da formula do balanco geral: SOMATORIO(receitas50+receitas_50) - SOMATORIO(despesas)
+    # Ou seja, serao somados todos as entradas ate 50, todas as entradas maiores que 50 e serao subtraidos o valor do somatorio das despesas
+
+
     try:
         itensp = len(pessoa.objects.all())
         itenspb = len(pessoa_valor_branco.objects.all())
