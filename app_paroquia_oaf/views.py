@@ -136,6 +136,7 @@ def lista_pessoas(request):
 
 @login_required()
 def relatorio(request):
+    global soma
     '''
         Relatorio geral do sistema.
     '''
@@ -146,6 +147,10 @@ def relatorio(request):
 
     #declaracao das variaveis que irao compor o sistema
     #estas variaveis sao de tamanho de registos nas classes
+
+    pessoas_com_valores_carne = pessoa()
+    pessoas_sem_valores_carne = pessoa_valor_branco()
+
     obj_valores_carne = receita_ate_50()
     obj_sem_valores_carne = receita_maior_50()
     total_pessoas_valores_de_carne = len(pessoa.objects.all())
@@ -161,7 +166,11 @@ def relatorio(request):
     lista_50 =[]
     lista_100 =[]
     lista_maior =[]
-    for i in range(total_pessoas_valores_de_carne):
+    soma = 0
+
+    #calculo de valores pagos geral
+
+    for i in range(total_pessoas_pagaram_valor_carne):
         if obj_valores_carne.valor_recebido==10:
             lista_10.append(i)
         elif obj_valores_carne.valor_recebido==20:
@@ -173,11 +182,32 @@ def relatorio(request):
         elif obj_valores_carne.valor_recebido ==100:
             lista_100.append(i)
     total_com_valores= (len(lista_10)*10)+(len(lista_20)*20)+(len(lista_30)*30)+(len(lista_50)*50)+(len(lista_100)*100)
-    for i in range(total_pessoas_sem_valores_de_carne):
+    for i in range(total_pessoas_pagaram_sem_valor_carne):
         if obj_sem_valores_carne!=0:
             objeto = receita_maior_50.objects.get(pk=i)
             lista_maior.append(objeto.valor_recebido)
+    for i in range(len(lista_maior)):
+        soma = lista_maior[i]+soma
+    total_sem_valores = soma
+    valor_total_recebido = total_com_valores+total_sem_valores
+
+    for i in range(total_pessoas_valores_de_carne):
+
+        if pessoas_com_valores_carne.valor_de_carne==10:
+            lista_10.append(i)
+        elif pessoas_com_valores_carne.valor_de_carne==20:
+            lista_20.append(i)
+        elif pessoas_com_valores_carne.valor_de_carne==30:
+            lista_30.append(i)
+        elif pessoas_com_valores_carne.valor_de_carne==50:
+            lista_50.append(i)
+        elif pessoas_com_valores_carne.valor_de_carne==100:
+            lista_100.append(i)
 
     total_geral_contribuintes = int(total_pessoas_valores_de_carne)+int(total_pessoas_sem_valores_de_carne)
     total_contribuintes_em_dias = int(total_pessoas_pagaram_valor_carne)+ int(total_pessoas_pagaram_sem_valor_carne)
-    return render_to_response("relatorio.html",{"total_pessoas":total_geral_contribuintes, "total_contribuintes_em_dia":total_contribuintes_em_dias})
+    valor_total_cadastrado = (len(lista_10)*10)+(len(lista_20)*20)+(len(lista_30)*30)+(len(lista_50)*50)+(len(lista_100)*100)
+
+
+
+    return render_to_response("relatorio.html",{"total_pessoas":total_geral_contribuintes, "total_contribuintes_em_dia":total_contribuintes_em_dias,"valor_total_cadastrado":valor_total_recebido, "valor_total_cadastrado":valor_total_cadastrado})

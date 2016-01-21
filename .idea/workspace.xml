@@ -4,7 +4,6 @@
     <list default="true" id="d9084ed9-77fc-401d-b0fd-4f273e89c138" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/relatorio.html" afterPath="$PROJECT_DIR$/templates/relatorio.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_paroquia_oaf/views.py" afterPath="$PROJECT_DIR$/app_paroquia_oaf/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="paroquial.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,21 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_paroquia_oaf/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74111676" vertical-offset="2751" max-vertical-offset="3213">
-              <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3283" max-vertical-offset="3723">
+              <caret line="212" column="242" selection-start-line="212" selection-start-column="242" selection-end-line="212" selection-end-column="242" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relatorio.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="relatorio.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/relatorio.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.538462" vertical-offset="23" max-vertical-offset="527">
-              <caret line="19" column="105" selection-start-line="19" selection-start-column="105" selection-end-line="19" selection-end-column="105" />
+            <state vertical-scroll-proportion="0.8179191" vertical-offset="23" max-vertical-offset="527">
+              <caret line="18" column="106" selection-start-line="18" selection-start-column="106" selection-end-line="18" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -126,8 +125,8 @@
         <option value="$PROJECT_DIR$/templates/relatorio_sem_basicos.html" />
         <option value="$PROJECT_DIR$/app_paroquia_oaf/models.py" />
         <option value="$PROJECT_DIR$/app_paroquia_oaf/forms.py" />
-        <option value="$PROJECT_DIR$/templates/relatorio.html" />
         <option value="$PROJECT_DIR$/app_paroquia_oaf/views.py" />
+        <option value="$PROJECT_DIR$/templates/relatorio.html" />
       </list>
     </option>
   </component>
@@ -523,7 +522,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32626426" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329296" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -534,7 +533,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2903752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2903752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -919,18 +918,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/relatorio.html">
+    <entry file="file://$PROJECT_DIR$/app_paroquia_oaf/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.538462" vertical-offset="23" max-vertical-offset="527">
-          <caret line="19" column="105" selection-start-line="19" selection-start-column="105" selection-end-line="19" selection-end-column="105" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3283" max-vertical-offset="3723">
+          <caret line="212" column="242" selection-start-line="212" selection-start-column="242" selection-end-line="212" selection-end-column="242" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_paroquia_oaf/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/relatorio.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74111676" vertical-offset="2751" max-vertical-offset="3213">
-          <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.8179191" vertical-offset="23" max-vertical-offset="527">
+          <caret line="18" column="106" selection-start-line="18" selection-start-column="106" selection-end-line="18" selection-end-column="106" />
           <folding />
         </state>
       </provider>
