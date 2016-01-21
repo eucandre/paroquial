@@ -1,19 +1,10 @@
 {% extends "index1.html" %}
 
 {% block corpo %}
-    <h3>Cadastro de contribuintes</h3><span> valores até R$ 50,00</span>
+    <h3>Cadastro de contribuintes</h3><span> valores até R$ 100,00</span>
     <form  method="post" action=".">
     {% csrf_token %}
-        {{ form.nome.label_tag }}
-        {{ form.nome }}
-        <br>
-        {{ form.logradouro.label_tag }}
-        {{ form.logradouro }}
-        {{ form.numero_residencial.label_tag }}
-        {{ form.numero_residencial }}
-        {{ form.valor_cadastrado.label_tag }}
-        {{ form.valor_cadastrado }}
-
+        {{ form.as_p }}
     <button class="btn btn-default" type="submit" name="Enviar" value="/">ENVIAR</button>
 
     </form>

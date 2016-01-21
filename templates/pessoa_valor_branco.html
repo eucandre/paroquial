@@ -1,9 +1,19 @@
 {% extends "index1.html" %}
 {% block corpo %}
-    <h3>Cadastro de contribuintes</h3><span> valores superiores a R$ 50,00</span>
+    <h3>Cadastro de contribuintes</h3><span> valores superiores a R$ 100,00</span>
     <form method="post" action="">
     {% csrf_token %}
-    {{ form.as_p }}
+        {{ form.nome.label_tag }}
+        {{ form.nome }}
+
+        {{ form.valor.label_tag }}
+        {{ form.valor }}
+        {{ form.logradouro.label_tag }}
+        {{ form.logradouro }}
+        {{ form.numero_residencial.label_tag }}
+        {{ form.numero_residencial }}
+        {{ form.tipo_de_regularidade.label_tag }}
+        {{ form.tipo_de_regularidade }}
     <button class="btn btn-default" type="submit" value="/">ENVIAR</button>
     </form>
 {% endblock %}

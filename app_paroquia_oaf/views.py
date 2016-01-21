@@ -39,8 +39,8 @@ def pessoas_valor_em_branco(request):
 def receitas(request):
     if request.method=="POST":
         form = Formreceita_ate_50(request.POST, request.FILES)
-        hoje = datetime.date()
-        mes = hoje.month
+        #hoje = datetime.date()
+        #mes = hoje.month
         if form.is_valid():
             dados = form.cleaned_data
             item = receita_ate_50(responsavel_pelo_recebimento = dados['responsavel_pelo_recebimento'],
@@ -51,15 +51,16 @@ def receitas(request):
             return render_to_response("salvo.html", {})
     else:
         form = Formreceita_ate_50()
-    return render_to_response("receita.html", {"form":form, "mes":mes}, context_instance = RequestContext(request))
+        #mes = hoje.month
+    return render_to_response("receita.html", {"form":form}, context_instance = RequestContext(request))
 
 
 @login_required()
 def receitass(request):
     if request.method=="POST":
         form = Formreceita_maior_50(request.POST, request.FILES)
-        hoje = datetime.date()
-        mes = hoje.month
+        #hoje = datetime.date()
+        #mes = hoje.month
         if form.is_valid():
             dados = form.cleaned_data
             item = receita_maior_50(responsavel_pelo_recebimento = dados['responsavel_pelo_recebimento'],
@@ -70,7 +71,8 @@ def receitass(request):
             return render_to_response("salvo.html", {})
     else:
         form = Formreceita_maior_50()
-    return render_to_response("receita_mais50.html", {"form":form, "mes":mes}, context_instance = RequestContext(request))
+
+    return render_to_response("receita_mais50.html", {"form":form}, context_instance = RequestContext(request))
 
 
 @login_required()
