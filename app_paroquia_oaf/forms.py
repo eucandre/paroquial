@@ -4,13 +4,19 @@ from MetodosAdicionais import *
 
 
 VALOR = ((u'10','10'),(u'20','20'),(u'50','50'))
+TIPO = ((u'Mensal','Mensal'),(u'Sazonal', 'Sazonal'))
 
-
-class Formpessoa(forms.Form):
+class Formpessoa(forms.ModelForm):
     nome = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
     logradouro = forms.CharField(max_length=150,widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
     numero_residencial = forms.IntegerField(label="Numero",widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
-    valor_cadastrado = forms.ChoiceField(choices=VALOR,widget=forms.Select(attrs={"class":"form-control", "style":"width:10%;"}))
+    valor_de_carne = forms.ChoiceField(choices=VALOR,widget=forms.Select(attrs={"class":"form-control", "style":"width:10%;"}))
+    tipo_de_regularidade = forms.ChoiceField(choices=TIPO,widget=forms.Select(attrs={"class":"form-control", "style":"width:10%;"}))
+
+    class Meta:
+        model = pessoa_valor_branco
+        fields = ['nome', 'logradouro','numero_residencial','tipo_de_regularidade', 'valor_de_carne']
+
 
 
 class Formpessoa_valor_branco(forms.ModelForm):
@@ -18,11 +24,13 @@ class Formpessoa_valor_branco(forms.ModelForm):
     valor = forms.IntegerField( widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%"}))
     logradouro = forms.CharField(max_length=150,widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
     numero_residencial = forms.IntegerField(label="Numero",widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
+    valor_de_carne = forms.ChoiceField(choices=VALOR,widget=forms.Select(attrs={"class":"form-control", "style":"width:10%;"}))
+    tipo_de_regularidade = forms.ChoiceField(choices=TIPO,widget=forms.Select(attrs={"class":"form-control", "style":"width:10%;"}))
 
 
     class Meta:
         model = pessoa_valor_branco
-        fields = ['nome', 'valor','logradouro','numero_residencial']
+        fields = ['nome', 'valor','logradouro','numero_residencial','tipo_de_regularidade', 'valor_de_carne']
 
 class Formreceita_ate_50(forms.Form):
     responsavel_pelo_recebimento = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class":"form-control", "style":"width:50%"}))
@@ -36,6 +44,7 @@ class Formreceita_maior_50(forms.Form):
     valor_recebido = forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
     pessoa_contribuinte = forms.ModelChoiceField(queryset=pessoa_valor_branco.objects.all(),widget=forms.Select(attrs={"class":"form-control", "style":"width:50%"}))
     mes_referente = forms.DateField(widget=forms.TextInput(attrs={"class":"form-control", "style":"width:10%;"}))
+
 
 
 class Formdespesas(forms.Form):

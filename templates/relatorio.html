@@ -1,118 +1,25 @@
 {% extends 'index1.html' %}
 
-
-
 {% block corpo %}
+    <h3 class="text-center label-primary ">Relatório Geral</h3>
+    <div class="panel panel-default">
 
-        <h3>Quantidade de contribuintes até R$ 50,00  :</h3><span style="left: 65%;top: 30%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho50 }}</span>
+    <span class="col-md-6 col-sm-12 col-xs-12 label-default panel-success text-justify">Total de contribuintes <br><small class="text-info">cadastrados</small></span>
 
-        <h3>Quantidade de contribuintes a cima de R$ 50,00 :</h3>
-        <span style="left: 65%;top: 35%; color: #67b168;position: absolute; font-size: 20px;">{{ tamanho_maior_50 }}</span>
-        <h3>Total recebido</h3><span>{{ soma }}</span>
-
-    <div class="col-md-12">
-                        <h1 class="page-header">
-
-                        </h1>
-                    </div>
+    <span class="col-md-6 col-sm-12 col-xs-12 label-info panel-success">Total de contribuintes <br><small class="text-success">que pagaram</small></span>
 
 
-
-        <hr>
-        <h3>Contribuiram até R$50,00</h3>
-
-        {% for i in obj_receita50 %}
-                <p style="color: #67b168;">{{ i.pessoa_contribuinte }} - Valor : {{ i.valor_recebido }}</p>
-                <span>Recebido em:  {{ i.mes_referente }}</span>
-               {% empty %}
-            <hr>
-            <span style="color: red">sem registro</span>
-
-            {% endfor %}
-
-    <h3>Lista de pessoas cadastradas no sistema</h3>
-    {% for i in pessoa50 %}
-        <p style="color: #67b168;">{{ i.nome }} - Valor de cadastro : {{ i.valor_cadastrado }}</p>
-               {% empty %}
-            <hr>
-            <span style="color: red">sem registro</span>
-
-    {% endfor %}
-    {% for j in pessaos50 %}
-        <p style="color: #67b168;">{{ j.nome }} - Valor de cadastro : {{ j.valor }}</p>
-               {% empty %}
-            <hr>
-            <span style="color: red">sem registro</span>
-    {% endfor %}
-    <h3>Total de pessoas cadastradas no sistema</h3>
-    <span></span>total de<span style="color: #67b168">  {{Todos_contribuintes }} </span><span>Contribuintes cadastrados no sistema</span>
-
-    <h3 style="left: 60%;top: 48%;position: absolute;">Contribuiram a cima de R$50,00</h3>
-    <div style="left: 60%;top: 52%;position: absolute;">
-    {% for i in obj_maior_50 %}
-        <p style="color: #67b168;">{{ i.pessoa_contribuinte }} - Valor  : {{ i.valor_recebido }}</p>
-        <span>Recebido em: {{ i.mes_referente }}</span>
-        {% empty %}
-        <hr>
-        <span style="color: red">sem registo</span>
-    {% endfor %}
     </div>
-
-
-
-    <h3 style="left: 60%;top: 78%;position: absolute;">Contribuiram até R$10,00</h3>
-    <div style="left: 60%;top: 82%;position: absolute;">
-    {% for i in ate10 %}
-        <p style="color: #67b168;">{{ i }}</p>
-        <span></span>
-        {% empty %}
-        <hr>
-        <span style="color: red">sem registo</span>
-    {% endfor %}
+    <h3  class="panel-success text-center" style="width: 10%;position: relative">{{ total_pessoas }}</h3>
+    <h3  class="panel-success text-center" style="left: 52%;top: -30px;width: 10%;position: relative">cd</h3>
+    <div class="panel panel-default">
+        <span class="col-md-6 col-sm-12 col-xs-12 label-default panel-success text-justify text-center">Valor total cadastrado</span>
+        <span class="col-md-6 col-sm-12 col-xs-12 label-info panel-success text-center">Valor total recebido</span>
     </div>
-
-
-    <h3 style="left: 60%;top: 108%;position: absolute;">Contribuiram até R$20,00</h3>
-    <div style="left: 60%;top: 112%;position: absolute;">
-    {% for i in ate20 %}
-        <p style="color: #67b168;">{{ i }}</p>
-        <span></span>
-        {% empty %}
-        <hr>
-        <span style="color: red">sem registo</span>
-    {% endfor %}
-    </div>
-
-
-    <h3 style="left: 60%;top: 138%;position: absolute;">Contribuiram até R$30,00</h3>
-    <div style="left: 60%;top: 142%;position: absolute;">
-    {% for i in ate30 %}
-        <p style="color: #67b168;">{{ i }}</p>
-        <span></span>
-        {% empty %}
-        <hr>
-        <span style="color: red">sem registo</span>
-    {% endfor %}
-    </div>
-
-    <h3 style="left: 60%;top: 168%;position: absolute;">Contribuiram até R$50,00</h3>
-    <div style="left: 60%;top: 172%;position: absolute;">
-    {% for i in ate50 %}
-        <p style="color: #67b168;">{{ i }}</p>
-        <span></span>
-        {% empty %}
-        <hr>
-        <span style="color: red">sem registo</span>
-    {% endfor %}
-    </div>
-
-
-   {% endblock %}
-
-{% block auxiliar %}
-<div style="width:30%">
-			<canvas id="canvas" height="450" width="450"></canvas>
-
-		</div>
+    <h3  class="panel-success text-center" style="width: 10%;position: relative">cd</h3>
+    <h3  class="panel-success text-center" style="left: 52%;top: -30px;width: 10%;position: relative">cd</h3>
+    <h4 class="fa fa-user fa-2x" style="position: relative; left: 1000px;top:-65px;">%</h4>
 
 {% endblock %}
+
+

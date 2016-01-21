@@ -17,8 +17,8 @@ def pessoas(request):
         form = Formpessoa(request.POST, request.FILES)
         if form.is_valid():
             dados = form.cleaned_data
-            item = pessoa(nome = dados['nome'],logradouro = dados['logradouro'], numero_residencial=dados['numero_residencial'], valor_cadastrado=dados['valor_cadastrado'])
-            item.save()
+            form.save()
+
             return render_to_response("salvo.html", {})
     else:
         form = Formpessoa()
@@ -39,6 +39,8 @@ def pessoas_valor_em_branco(request):
 def receitas(request):
     if request.method=="POST":
         form = Formreceita_ate_50(request.POST, request.FILES)
+        hoje = datetime.date()
+        mes = hoje.month
         if form.is_valid():
             dados = form.cleaned_data
             item = receita_ate_50(responsavel_pelo_recebimento = dados['responsavel_pelo_recebimento'],
@@ -49,13 +51,15 @@ def receitas(request):
             return render_to_response("salvo.html", {})
     else:
         form = Formreceita_ate_50()
-    return render_to_response("receita.html", {"form":form}, context_instance = RequestContext(request))
+    return render_to_response("receita.html", {"form":form, "mes":mes}, context_instance = RequestContext(request))
 
 
 @login_required()
 def receitass(request):
     if request.method=="POST":
         form = Formreceita_maior_50(request.POST, request.FILES)
+        hoje = datetime.date()
+        mes = hoje.month
         if form.is_valid():
             dados = form.cleaned_data
             item = receita_maior_50(responsavel_pelo_recebimento = dados['responsavel_pelo_recebimento'],
@@ -66,7 +70,7 @@ def receitass(request):
             return render_to_response("salvo.html", {})
     else:
         form = Formreceita_maior_50()
-    return render_to_response("receita_mais50.html", {"form":form}, context_instance = RequestContext(request))
+    return render_to_response("receita_mais50.html", {"form":form, "mes":mes}, context_instance = RequestContext(request))
 
 
 @login_required()
@@ -132,99 +136,24 @@ def lista_pessoas(request):
 
 @login_required()
 def relatorio(request):
+    '''
+        Relatorio geral do sistema.
+    '''
     #fazer a verificacao por meses de  pagamento no relatorio.
     #fazer total mensal, ja esta quase pronto, fazer o total geral, a somatoria dos meses menos as possiveis retiradas
     # prototipo da formula do balanco geral: SOMATORIO(receitas50+receitas_50) - SOMATORIO(despesas)
     # Ou seja, serao somados todos as entradas ate 50, todas as entradas maiores que 50 e serao subtraidos o valor do somatorio das despesas
 
+    #declaracao das variaveis que irao compor o sistema
+    #estas variaveis sao de tamanho de registos nas classes
+    total_pessoas_valores_de_carne = len(pessoa.objects.all())
+    total_pessoas_sem_valores_de_carne = len(pessoa_valor_branco.objects.all())
 
-    try:
-        itensp = len(pessoa.objects.all())
-        itenspb = len(pessoa_valor_branco.objects.all())
+    #estas variaveis sao de manipilacao dos pagamentos
+    total_pessoas_pagaram_valor_carne = len(receita_ate_50.objects.all())
+    total_pessoas_pagaram_sem_valor_carne = len(receita_maior_50.objects.all())
 
-        if itensp!=0 and itenspb!=0:
-            obj_receita50 = receita_ate_50.objects.all()
-            tam_receita50 = len(receita_ate_50.objects.all())
-            obj_receita_50 = receita_maior_50.objects.all()
-            obj_soma_receita50 = receita_ate_50()
-            obj_soma_receita_50 = receita_maior_50()
-            pessoas_50 = pessoa.objects.all()
-            pessoas_mais = pessoa_valor_branco.objects.all()
 
-            ate_10 = []
-            ate_20 = []
-            ate_30 = []
-            ate_50 = []
-            acima_50 = []
-            soma = 0
-            for i in obj_receita50:
-                if i.valor_recebido==10:
-                    ate_10.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_10)*10
-                elif i.valor_recebido==20:
-                    ate_20.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_20)*20
-                elif i.valor_recebido==30:
-                    ate_30.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_30)*30
-                elif i.valor_recebido==50:
-                    ate_50.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_50)*50
+    total_geral_contribuintes = int(total_pessoas_valores_de_carne)+int(total_pessoas_sem_valores_de_carne)
 
-            for i in obj_receita_50:
-                if i.valor_recebido>50:
-                    acima_50.append(i.pessoa_contribuinte.nome)
-                    soma = soma+i.valor_recebido
-            tam_receita_maior50 = len(receita_maior_50.objects.all())
-            total_pessoas_sistema = itensp+itenspb
-            return render_to_response("relatorio.html",{"obj_receita50":obj_receita50, "obj_maior_50":obj_receita_50, "tamanho50":tam_receita50, "tamanho_maior_50":tam_receita_maior50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50, "acima":acima_50,"soma":soma, "pessoa50":pessoas_50, "pessaos50":pessoas_mais,"totalPessoas50":itensp, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
-        elif itensp==0 and itenspb==0:
-            return render_to_response("relatorio_vazio.html")
-
-        elif itensp!=0 and itenspb==0:
-            obj_receita50 = receita_ate_50.objects.all()
-            tam_receita50 = len(receita_ate_50.objects.all())
-            #obj_receita_50 = receita_maior_50.objects.all()
-            obj_soma_receita50 = receita_ate_50()
-            #obj_soma_receita_50 = receita_maior_50()
-            pessoas_50 = pessoa.objects.all()
-            #pessoas_mais = pessoa_valor_branco.objects.all()
-
-            ate_10 = []
-            ate_20 = []
-            ate_30 = []
-            ate_50 = []
-            soma = 0
-            for i in obj_receita50:
-                if i.valor_recebido==10:
-                    ate_10.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_10)*10
-                elif i.valor_recebido==20:
-                    ate_20.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_20)*20
-                elif i.valor_recebido==30:
-                    ate_30.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_30)*30
-                elif i.valor_recebido==50:
-                    ate_50.append(i.pessoa_contribuinte.nome)
-                    soma = len(ate_50)*50
-            total_pessoas_sistema = itensp
-            return render_to_response("relatorio _Sem_valor_branco.html",{"obj_receita50":obj_receita50, "tamanho50":tam_receita50,"ate10":ate_10, "ate20":ate_20, "ate30":ate_30,"ate50":ate_50,"soma":soma, "pessoa50":pessoas_50,"totalPessoas50":itensp, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
-
-        elif itensp ==0 and itenspb!=0:
-            obj_receita_50 = receita_maior_50.objects.all()
-            pessoas_50 = pessoa.objects.all()
-            pessoas_mais = pessoa_valor_branco.objects.all()
-            acima_50 = []
-            soma = 0
-            for i in obj_receita_50:
-                if i.valor_recebido>50:
-                    acima_50.append(i.pessoa_contribuinte.nome)
-                    soma = soma+i.valor_recebido
-            tam_receita_maior50 = len(receita_maior_50.objects.all())
-            total_pessoas_sistema = itenspb
-            return render_to_response("relatorio_sem_basicos.html",{"obj_maior_50":obj_receita_50,"tamanho_maior_50":tam_receita_maior50, "acima":acima_50,"soma":soma, "pessoa50":pessoas_50, "pessaos50":pessoas_mais, "total_pessoas_50":itenspb, "Todos_contribuintes":total_pessoas_sistema})# "plots":json})
-
-    except receita_ate_50.DoesNotExist and receita_maior_50.DoesNotExist:
-        raise Http404()
-
+    return render_to_response("relatorio.html",{"total_pessoas":total_geral_contribuintes})
